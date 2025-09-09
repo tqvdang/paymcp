@@ -21,7 +21,7 @@ def make_paid_wrapper(func, mcp, provider, price_info):
 
     confirm_tool_name = f"confirm_{func.__name__}_payment"
 
-    # --- Step 2: payment confirmation -----------------------------------------
+    # --- Step 2: payment confirmation -----------------------------------------
     @mcp.tool(
         name=confirm_tool_name,
         description=f"Confirm payment and execute {func.__name__}()"
@@ -44,7 +44,7 @@ def make_paid_wrapper(func, mcp, provider, price_info):
         # Call the original tool with its initial arguments
         return await func(**original_args)
 
-    # --- Step 1: payment initiation -------------------------------------------
+    # --- Step 1: payment initiation -------------------------------------------
     @functools.wraps(func)
     async def _initiate_wrapper(*args, **kwargs):
         payment_id, payment_url = provider.create_payment(
